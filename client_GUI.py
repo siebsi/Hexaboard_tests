@@ -170,7 +170,7 @@ class Select_and_launch_tests(GridLayout):
         self.config.iv_variables['delay']=float(self.ids.ivdelay.text)
         self.config.iv_variables['humidity']=self.ids.hum.text
         self.config.iv_variables['temperature']=self.ids.temperature.text
-        self.config.default_options['daq_options']['hv']=int(self.ids.hv.text)
+        #self.config.default_options['daq_options']['hv']=int(self.ids.hv.text)
         channels=[]
         if self.ids.inputch.text=='all':
             for i in range(64):
@@ -182,6 +182,14 @@ class Select_and_launch_tests(GridLayout):
             channels=self.ids.inputch.text.split(',')
             channels=[int(i) for i in channels]
             self.config.default_options['daq_options']['channelIds']=channels
+       
+
+        if self.ids.hv.text==('' or ' '):
+            self.config.default_options['daq_options']['hv']=[float(0)]
+        else:
+            hv_values=self.ids.hv.text.split(',')
+            hv_values=[float(i) for i in hv_values]
+            self.config.default_options['daq_options']['hv']=hv_values
 
         '''Perform tests: (see rpi_data_tests.py for details)'''
         #Read GUI-Input
